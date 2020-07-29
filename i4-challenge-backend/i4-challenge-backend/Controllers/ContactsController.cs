@@ -12,9 +12,9 @@ namespace i4_challenge_backend.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public ContactsController(ApplicationDbContext context)
+        public ContactsController(IApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,15 +23,15 @@ namespace i4_challenge_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
         {
-            return await _context.Contacts.ToListAsync();
+            return await _context.GetContacts();
         }
 
         // GET: api/Contacts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Contact>> GetContact(int id)
         {
-            var contact = await _context.Contacts.FindAsync(id);
-
+            var contact = await _context.GetContact(id);
+            
             if (contact == null)
             {
                 return NotFound();
@@ -51,11 +51,11 @@ namespace i4_challenge_backend.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(contact).State = EntityState.Modified;
+            _context.MarkAsModified(contact);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChange();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,15 +78,7 @@ namespace i4_challenge_backend.Controllers
         [HttpPost]
         public async Task<ActionResult<Contact>> PostContact(Contact contact)
         {
-            _context.Contacts.Add(contact);
-            contact.Phones = contact.Phones.Select(c => { c.ContactId = contact.ContactId; return c; }).ToList();
-            
-            foreach (var phone in contact.Phones)
-            {
-                _context.Phones.Add(phone);
-            }
-
-            await _context.SaveChangesAsync();
+            await _context.CreateContact(contact);
             return CreatedAtAction("GetContact", new { id = contact.ContactId }, contact);
         }
 
@@ -100,8 +92,7 @@ namespace i4_challenge_backend.Controllers
                 return NotFound();
             }
 
-            _context.Contacts.Remove(contact);
-            await _context.SaveChangesAsync();
+            await _context.RemoveContact(contact);
 
             return contact;
         }

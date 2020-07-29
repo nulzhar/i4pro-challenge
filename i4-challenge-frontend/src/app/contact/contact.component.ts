@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContactService } from 'app/service/contact.service';
 import { Contact } from 'app/model/Contact';
 
@@ -13,7 +14,7 @@ export class ContactComponent implements OnInit {
   @Input()
   contact: Contact;
 
-  constructor(private service: ContactService) { }
+  constructor(private service: ContactService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,5 +28,8 @@ export class ContactComponent implements OnInit {
         error => alert(error),
         () => console.log("acesso a webapi post ok...")
       );
+  }
+  showContact(): void {
+    this.router.navigate( ['/contact', {id: this.contact.contactId}]);
   }
 }

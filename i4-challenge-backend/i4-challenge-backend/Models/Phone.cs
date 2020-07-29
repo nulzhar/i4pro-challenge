@@ -6,5 +6,6 @@
         public int ContactId { get; set; }
         public string PhoneType { get; set; }
         public string Number { get; set; }
+        //public Contact Contact { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using i4_challenge_backend.Models;
 namespace i4_challenge_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200729034248_InitialCreate")]
+    [Migration("20200729111225_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

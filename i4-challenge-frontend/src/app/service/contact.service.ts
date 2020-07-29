@@ -36,6 +36,14 @@ export class ContactService {
        {headers: this.getHeader()}).map(res=> <Contact[]>res.json());
   }
 
+  getContact(contactId: number): Observable<Contact> {
+    var headers = new Headers();
+    headers.append("Content-Type", "application/json; chartset=utf-8");
+
+    return this.http.get(this.api + "/" + contactId,
+       {headers: this.getHeader()}).map(res=> <Contact>res.json());
+  }
+
   private getHeader(): Headers {
     var headers = new Headers();
     headers.append("Content-Type", "application/json; chartset=utf-8");

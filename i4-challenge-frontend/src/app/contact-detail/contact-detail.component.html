@@ -1,7 +1,13 @@
 <a routerLink="/">Back</a>
-<p>
-  contact-detail works!
-  <input type="text" name="FirstName" id="FirstName" [(ngModel)]="contact.firstName">
-  <input type="text" name="LastName" id="LastName" [(ngModel)]="contact.lastName">
-</p>
+<div>
+  Nome: <input type="text" name="FirstName" id="FirstName" [(ngModel)]="contact.firstName">
+  Sobrenome: <input type="text" name="LastName" id="LastName" [(ngModel)]="contact.lastName">
+  <div>
+    <ul>
+      <li *ngFor="let phone of contact.phones">
+        Tipo: {{phone.phoneType}} / Número: {{phone.number}}
+      </li>
+    </ul>
+  </div>
+</div>
 <button (click)="createNewContact()">Salvar</button>

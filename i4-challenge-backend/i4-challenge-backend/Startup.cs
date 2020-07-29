@@ -25,6 +25,7 @@ namespace i4_challenge_backend
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddCors();
+            services.AddTransient<IApplicationDbContext, ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
