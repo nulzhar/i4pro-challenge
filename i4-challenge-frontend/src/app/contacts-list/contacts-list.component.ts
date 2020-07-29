@@ -39,7 +39,7 @@ export class ContactsListComponent implements OnInit {
   }
 
   onError(error: any): void {
-    alert(error);
+    console.log(error);
   }
 
   onProcess(data: Contact[]): void {

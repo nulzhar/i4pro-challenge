@@ -96,7 +96,7 @@ export class ContactDetailComponent implements OnInit {
   }
   
   onComplete(): void {
-    if(this.contact.contactId) {
+    if(this.contact.contactId && !this.contactId) {
       alert("Inserido com sucesso!")
       this.contactId = this.contact.contactId;
     }

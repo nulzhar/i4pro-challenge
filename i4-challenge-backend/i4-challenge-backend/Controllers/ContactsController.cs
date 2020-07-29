@@ -89,7 +89,7 @@ namespace i4_challenge_backend.Controllers
             var contact = await _context.Contacts.FindAsync(id);
             if (contact == null)
             {
-                return NotFound();
+                return NotFound("Este contato não existe ou já foi excluído, atualize a tela.");
             }
 
             await _context.RemoveContact(contact);

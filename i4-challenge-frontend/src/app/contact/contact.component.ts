@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
     this.service.deleteContact(this.contact)
       .subscribe(
         data => this.postData = JSON.stringify(data),
-        error => alert(error),
+        error => console.log(error),
         () => console.log("acesso a webapi post ok...")
       );
   }
