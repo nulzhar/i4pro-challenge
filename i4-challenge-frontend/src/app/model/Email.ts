@@ -1,5 +1,6 @@
 
 export class Email {
+    contactId?: number;
     emailId?: number;
-    EmailAddress?: string;
+    emailAddress?: string;
 }

@@ -1,6 +1,11 @@
-<p>
-  {{contact.contactId}}
-  {{contact.firstName}}
-</p>
-<button (click)="showContact()">Visualizar</button>
-<button (click)="deleteContact()">Remover</button>
+<div class="row">
+ <div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header" style="font-size: 1.4rem;">{{contact.lastName}}, {{contact.firstName}}</div>
+    <div class="card-body">
+      <div class="card-text">
+        <button class="btn btn-info" (click)="showContact()">Visualizar</button>
+        <button class="btn btn-warning" (click)="deleteContact()">Remover</button>
+      </div>
+    </div>
+  </div>
+</div>

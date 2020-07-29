@@ -1,13 +1,47 @@
 <a routerLink="/">Back</a>
-<div>
-  Nome: <input type="text" name="FirstName" id="FirstName" [(ngModel)]="contact.firstName">
-  Sobrenome: <input type="text" name="LastName" id="LastName" [(ngModel)]="contact.lastName">
-  <div>
+<div style="font-size: 1.2rem;">
+  <div  class="form-group" style="border-bottom: 1px solid;">
+    <label>Nome:</label>
+    <input type="text" class="form-control" name="FirstName" id="FirstName" [(ngModel)]="contact.firstName" [attr.disabled]="contactId">
+    <label>Sobrenome:</label>
+    <input type="text" class="form-control"  name="LastName" id="LastName" [(ngModel)]="contact.lastName" [attr.disabled]="contactId">
+  </div>
+  
+  <div *ngIf="!contactId" class="form-group" style="border-bottom: 1px solid;">
+    <div class="custom-control custom-radio">
+      <input type="radio" id="customRadio1" name="TypePhone" value="celular" class="custom-control-input" [(ngModel)]="phoneType">
+      <label class="custom-control-label" for="customRadio1">Celular</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <input type="radio" id="customRadio2" name="TypePhone" value="fixo" class="custom-control-input" [(ngModel)]="phoneType">
+      <label class="custom-control-label" for="customRadio2">Fixo</label>
+    </div>
+    <input type="text" class="form-control"  name="Phone" [(ngModel)]="numberPhone">
+    <button class="btn btn-primary" (click)="insertPhone()">Incluir Número</button>
+  </div>
+  
+  <div *ngIf="!contactId" class="form-group">
+    <input type="text" class="form-control"  name="email" [(ngModel)]="emailAddress">
+    <button class="btn btn-primary" (click)="insertEmail()">Incluir E-mail</button>
+  </div>
+  
+  <div class="form-group" style="border-bottom: 1px solid;">
+    <h3>Telefones:</h3>
     <ul>
-      <li *ngFor="let phone of contact.phones">
+      <li *ngFor="let phone of contact.phones; let i = index">
         Tipo: {{phone.phoneType}} / Número: {{phone.number}}
+        <button *ngIf="!contactId" class="btn btn-danger" (click)="removePhone(i)">Remover Número</button>
+      </li>
+    </ul>
+  </div>
+  <div class="form-group" style="border-bottom: 1px solid;">
+    <h3>E-mails:</h3>
+    <ul>
+      <li *ngFor="let email of contact.emails; let i = index">
+        E-mail: {{email.emailAddress}}
+        <button *ngIf="!contactId" class="btn btn-danger"  (click)="removeEmail(i)">Remover Email</button>
       </li>
     </ul>
   </div>
 </div>
-<button (click)="createNewContact()">Salvar</button>
+<button *ngIf="!contactId" class="btn btn-secondary" (click)="createNewContact()">Salvar</button>

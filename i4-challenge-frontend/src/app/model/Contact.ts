@@ -5,6 +5,6 @@ export class Contact {
     contactId?: number;
     firstName?: string;
     lastName?: string;
-    Phones?: Phone[];
-    Emails?: Email[];
+    phones?: Phone[];
+    emails?: Email[];
 }

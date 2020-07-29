@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Contact } from 'app/model/Contact';
 import { ContactService } from 'app/service/contact.service';
+import { Phone } from 'app/model/Phone';
 
 @Component({
   selector: 'app-contact-detail',
@@ -13,8 +14,11 @@ export class ContactDetailComponent implements OnInit {
 
   constructor(private service: ContactService, private route:ActivatedRoute) { }
 
-  public contact: Contact = new Contact();
+  public contact: Contact = {phones: [], emails: []};
   private contactId: number;
+  phoneType: string;
+  numberPhone: string;
+  emailAddress: string;
 
   ngOnInit() {
     this.route.params.subscribe( params =>
@@ -33,6 +37,54 @@ export class ContactDetailComponent implements OnInit {
         () => this.onComplete()
       );
   }
+
+  insertPhone(): void {
+    if(this.contactId) {
+      this.contact.phones.push(
+        {
+          contactId: this.contactId ? this.contactId : null,
+          number: this.numberPhone,
+          phoneType: this.phoneType,
+        });
+    } else {
+      this.contact.phones.push(
+        {
+          number: this.numberPhone,
+          phoneType: this.phoneType,
+        });
+    }
+    
+    this.numberPhone = null;
+    this.phoneType = null;
+    console.log(this.contact);
+  }
+  
+  insertEmail(): void {
+    if(this.contactId) {
+      this.contact.emails.push(
+        {
+          contactId: this.contactId ? this.contactId : null,
+          emailAddress: this.emailAddress,
+        });
+    } else {
+      this.contact.emails.push(
+        {
+          emailAddress: this.emailAddress,
+        });
+    }
+    this.emailAddress = null;
+    console.log(this.contact);
+  }
+  
+  removePhone(index: number): void {
+    this.contact.phones.splice(index, 1);
+    console.log(this.contact);
+  }
+  
+  removeEmail(index: number): void {
+    this.contact.emails.splice(index, 1);
+    console.log(this.contact);
+  }
   
   getContact(): void {
     this.service.getContact(this.contactId)
@@ -44,6 +96,10 @@ export class ContactDetailComponent implements OnInit {
   }
   
   onComplete(): void {
+    if(this.contact.contactId) {
+      alert("Inserido com sucesso!")
+      this.contactId = this.contact.contactId;
+    }
     console.log("OnComplete...");
   }
 

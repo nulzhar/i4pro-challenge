@@ -15,7 +15,7 @@ export class ContactService {
   createContact(contact: Contact): Observable<Contact> {  
     var headers = new Headers();
     headers.append("Content-Type", "application/json; chartset=utf-8");
-    
+    console.log(JSON.stringify(contact));
     return this.http.post(this.api, JSON.stringify(contact),
        {headers: this.getHeader()}).map(res=> <Contact>res.json());
   }
