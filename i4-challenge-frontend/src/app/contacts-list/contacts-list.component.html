@@ -1,8 +1,10 @@
 contacts-list works!
 
-  <div *ngFor="let contact of contacts">
-    <app-contact 
-    [contact]="contact">
-  
-    </app-contact>
-  </div>
+<button (click)="createNewContact()">Registrar</button>
+
+<div *ngFor="let contact of contacts">
+  <app-contact 
+  [contact]="contact">
+
+  </app-contact>
+</div>

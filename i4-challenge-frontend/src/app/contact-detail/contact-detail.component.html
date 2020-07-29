@@ -1,3 +1,7 @@
+<a routerLink="/">Back</a>
 <p>
   contact-detail works!
+  <input type="text" name="FirstName" id="FirstName" [(ngModel)]="contact.firstName">
+  <input type="text" name="LastName" id="LastName" [(ngModel)]="contact.lastName">
 </p>
+<button (click)="createNewContact()">Salvar</button>

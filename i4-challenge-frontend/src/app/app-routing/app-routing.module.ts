@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { FormsModule }   from '@angular/forms';
+
 import { ContactsListComponent } from '../contacts-list/contacts-list.component';
 import { ContactComponent } from '../contact/contact.component';
 import { ContactDetailComponent } from '../contact-detail/contact-detail.component';
@@ -11,6 +14,10 @@ const routes: Routes = [
     component: ContactsListComponent,
   },
   {
+    path: 'contact',
+    component: ContactDetailComponent,
+  },
+  {
     path: 'contact/:id',
     component: ContactDetailComponent,
   }
@@ -19,7 +26,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    FormsModule
   ],
   exports: [
     RouterModule
